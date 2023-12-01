@@ -36,17 +36,24 @@ export const OtherInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+  width: 270px;
+  height: 40px;
   font-size: 12px;
   font-weight: 400;
 
   color: ${color.primary.black}80;
 
   margin-bottom: 28px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const Info = styled.p`
   display: flex;
   align-items: center;
+
   &:not(:last-of-type)::after {
     content: '';
     display: inline-block;

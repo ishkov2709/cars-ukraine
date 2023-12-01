@@ -4,33 +4,19 @@ import { color } from '../../../styles/colors';
 import { Box, Stub, Wrapper } from './SelectGroup.styled';
 import { Name } from '../FormSearch.styled';
 
-const options = [
-  { value: 'Buick', label: 'Buick' },
-  { value: 'Volvo', label: 'Volvo' },
-  { value: 'HUMMER', label: 'HUMMER' },
-  { value: 'Subaru', label: 'Subaru' },
-  { value: 'Mitsubishi', label: 'Mitsubishi' },
-  { value: 'Nissan', label: 'Nissan' },
-  { value: 'Lincoln', label: 'Lincoln' },
-  { value: 'GMC', label: 'GMC' },
-  { value: 'Hyundai', label: 'Hyundai' },
-  { value: 'MINI', label: 'MINI' },
-  { value: 'Bentley', label: 'Bentley' },
-  { value: 'Mercedes-Benz', label: 'Mercedes-Benz' },
-  { value: 'Aston Martin', label: 'Aston Martin' },
-  { value: 'Pontiac', label: 'Pontiac' },
-  { value: 'Lamborghini', label: 'Lamborghini' },
-  { value: 'Audi', label: 'Audi' },
-  { value: 'BMW', label: 'BMW' },
-  { value: 'Chevrolet', label: 'Chevrolet' },
-  { value: 'Mercedes-Benz', label: 'Mercedes-Benz' },
-  { value: 'Chrysler', label: 'Chrysler' },
-  { value: 'Kia', label: 'Kia' },
-  { value: 'Land', label: 'Land' },
-];
-
-const SelectGroup = ({ name = '', placeholder = '', width = '200px' }) => {
+const SelectGroup = ({
+  name = '',
+  placeholder = '',
+  width = '200px',
+  handler,
+  options,
+}) => {
   const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOption = selectedOption => {
+    setSelectedOption(selectedOption);
+    handler(selectedOption.value);
+  };
 
   return (
     <Wrapper>
@@ -70,10 +56,14 @@ const SelectGroup = ({ name = '', placeholder = '', width = '200px' }) => {
               color: `${color.primary.black}33`,
               borderRadius: 14,
               overflow: 'hidden',
+              padding: '14px 8px 14px 18px',
             }),
+            multiValueLabel: {
+              color: '#000000',
+            },
           }}
           value={selectedOption}
-          onChange={setSelectedOption}
+          onChange={handleOption}
           options={options}
           placeholder={placeholder}
         />

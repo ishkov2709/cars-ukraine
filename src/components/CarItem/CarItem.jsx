@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../common/Button';
 import {
   Img,
@@ -9,44 +10,67 @@ import {
   Wrapper,
   FavBtn,
 } from './CarItem.styled';
-import { FaRegHeart } from 'react-icons/fa';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
 
-const CarItem = ({
-  url,
-  brand,
-  year,
-  price,
-  city,
-  country,
-  grade,
-  model,
-  id,
-  feature,
-}) => {
+import { addToFavorites, removeFromFavorites } from '../../store/rootSlice';
+import { selectFavorites } from '../../store/selectors';
+
+const CarItem = ({ info }) => {
+  const favorites = useSelector(selectFavorites);
+  const dispatch = useDispatch();
+  const {
+    id,
+    year,
+    make,
+    model,
+    type,
+    img,
+    functionalities,
+    rentalPrice,
+    rentalCompany,
+    address,
+  } = info;
+
+  const handleAdd = () => {
+    dispatch(addToFavorites(info));
+  };
+
+  const handleRemove = () => {
+    dispatch(removeFromFavorites(id));
+  };
+
+  const [country, city] = address.split(', ').reverse().slice(0, 2);
   return (
     <Wrapper>
-      <Img src={url} width={274} alt="car" />
+      <Img src={img} width={274} alt="car" />
       <BrandAndPriceBox>
         <BrandYear>
-          {brand}, {year}
+          {make}, {year}
         </BrandYear>
-        <Price>{price}</Price>
+        <Price>{rentalPrice}</Price>
       </BrandAndPriceBox>
       <OtherInfo>
         <Info>{city}</Info>
         <Info>{country}</Info>
-        <Info>{grade}</Info>
+        <Info>{rentalCompany}</Info>
+        <Info>{type}</Info>
         <Info>{model}</Info>
         <Info>{id}</Info>
-        <Info>{feature}</Info>
+        <Info>{functionalities[0]}</Info>
       </OtherInfo>
       <Button style={{ width: '100%', height: 44, borderRadius: '12px' }}>
         Learn more
       </Button>
 
-      <FavBtn>
-        <FaRegHeart color="#ffffff" size={18} />
-      </FavBtn>
+      {favorites.find(el => el.id === id) ? (
+        <FavBtn>
+          <FaHeart onClick={handleRemove} color="#ffffff" size={18} />
+        </FavBtn>
+      ) : (
+        <FavBtn>
+          <FaRegHeart onClick={handleAdd} color="#ffffff" size={18} />
+        </FavBtn>
+      )}
     </Wrapper>
   );
 };

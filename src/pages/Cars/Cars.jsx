@@ -1,25 +1,44 @@
+import { useDispatch, useSelector } from 'react-redux';
 import CarItem from '../../components/CarItem/CarItem';
 import FormSearch from '../../components/FormSearch';
 import Container from '../../components/common/Container';
-import { Section } from './Cars.styled';
+import { List, MoreBtn, Section } from './Cars.styled';
+import { useEffect, useState } from 'react';
+import { getAdverts, paginatePage } from '../../store/thunk';
 
 const Cars = () => {
+  const adverts = useSelector(state => state.adverts);
+  const isLoading = useSelector(state => state.isLoading);
+  const error = useSelector(state => state.error);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(getAdverts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    page > 1 && dispatch(paginatePage(page));
+  }, [page, dispatch]);
+
+  const handlePaginate = () => {
+    setPage(prevState => (prevState = prevState + 1));
+  };
+
   return (
     <Section>
       <Container>
-        <FormSearch />
-        <CarItem
-          url="https://s.auto.drom.ru/i24283/c/photos/fullsize/mitsubishi/outlander/mitsubishi_outlander_1146548.jpg"
-          brand="Mitsubishi"
-          year="2010"
-          price="$30"
-          city="Lviv"
-          country="Ukraine"
-          grade="City Car Rentals"
-          model="Outlander"
-          id="9591"
-          feature="Power liftgate"
-        />
+        <FormSearch setPage={setPage} />
+        {adverts.length > 0 && (
+          <List>
+            {adverts.map(el => {
+              return <CarItem key={el.id} info={el} />;
+            })}
+          </List>
+        )}
+        {adverts.length > 0 && !isLoading && !error && (
+          <MoreBtn onClick={handlePaginate}>Load more</MoreBtn>
+        )}
       </Container>
     </Section>
   );
