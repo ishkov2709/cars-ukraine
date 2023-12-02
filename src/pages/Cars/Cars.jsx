@@ -1,17 +1,22 @@
-import { useDispatch, useSelector } from 'react-redux';
-import CarItem from '../../components/CarItem/CarItem';
-import FormSearch from '../../components/FormSearch';
-import Container from '../../components/common/Container';
-import { EmptyData, List, MoreBtn, Section } from './Cars.styled';
-import { useEffect, useState } from 'react';
-import { getAdverts, paginatePage } from '../../store/thunk';
+import {
+  selectAdverts,
+  selectError,
+  selectIsLoading,
+} from '../../store/selectors';
 import Loader from '../../components/common/Loader/Loader';
+import CarItem from '../../components/CarItem/CarItem';
+import Container from '../../components/common/Container';
+import FormSearch from '../../components/FormSearch';
 import { FaSadCry } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdverts, paginatePage } from '../../store/thunk';
+import { EmptyData, List, MoreBtn, Section } from './Cars.styled';
 
 const Cars = () => {
-  const adverts = useSelector(state => state.adverts);
-  const isLoading = useSelector(state => state.isLoading);
-  const error = useSelector(state => state.error);
+  const adverts = useSelector(selectAdverts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
 

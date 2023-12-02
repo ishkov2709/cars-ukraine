@@ -46,6 +46,7 @@ const rootSlice = createSlice({
       })
       .addCase(getAdverts.rejected, (state, { payload }) => {
         state.error = payload;
+        state.isLoading = false;
       })
       .addCase(paginatePage.pending, state => {
         state.isLoading = true;
@@ -57,6 +58,7 @@ const rootSlice = createSlice({
       })
       .addCase(paginatePage.rejected, (state, { payload }) => {
         state.error = payload;
+        state.isLoading = false;
       });
   },
 });
