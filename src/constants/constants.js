@@ -1,5 +1,5 @@
 const optionsCar = [
-  { value: '', label: 'All Cars' },
+  { value: null, label: 'All Cars' },
   { value: 'Buick', label: 'Buick' },
   { value: 'Volvo', label: 'Volvo' },
   { value: 'HUMMER', label: 'HUMMER' },

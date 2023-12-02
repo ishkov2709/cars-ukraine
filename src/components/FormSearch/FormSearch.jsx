@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../common/Button/Button';
 import { Form } from './FormSearch.styled';
 import PriceRange from './PriceRange/PriceRange';
@@ -8,8 +8,11 @@ import { useEffect } from 'react';
 import { createArrayPrice } from '../../utils/createArrayPrice';
 import { setMake, setPrice } from '../../store/rootSlice';
 import { constants } from '../../constants/constants';
+import { selectMake, selectPrice } from '../../store/selectors';
 
 const FormSearch = ({ setPage }) => {
+  const make = useSelector(selectMake);
+  const price = useSelector(selectPrice);
   const dispatch = useDispatch();
 
   const handlePrice = value => {
@@ -41,14 +44,14 @@ const FormSearch = ({ setPage }) => {
     <Form>
       <SelectGroup
         name="Car brand"
-        placeholder="Enter the text"
+        placeholder={make ?? 'Enter the text'}
         width="224px"
         handler={handleMake}
         options={constants.optionsCar}
       />
       <SelectGroup
         name="Price/ 1 hour"
-        placeholder="To $"
+        placeholder={price ? '$' + price : 'To $'}
         width="125px"
         handler={handlePrice}
         options={createArrayPrice(1000)}

@@ -1,7 +1,7 @@
 export const initialState = {
   adverts: [],
   filter: {
-    make: '',
+    make: null,
     price: null,
     minMileage: null,
     maxMileage: null,
