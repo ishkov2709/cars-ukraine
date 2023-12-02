@@ -31,8 +31,8 @@ const Cars = () => {
   }, [page, dispatch, setScrollPosition]);
 
   useEffect(() => {
-    adverts && window.scrollTo(0, scrollPosition);
-  }, [adverts, scrollPosition]);
+    !isLoading && window.scrollTo(0, scrollPosition);
+  }, [isLoading, scrollPosition]);
 
   const handlePaginate = () => {
     setPage(prevState => (prevState = prevState + 1));
