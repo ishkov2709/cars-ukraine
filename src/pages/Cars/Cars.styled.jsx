@@ -28,6 +28,13 @@ export const MoreBtn = styled.button`
 
   border-bottom: 1px solid ${color.primary.blue};
   padding-bottom: 0;
+
+  transition: color 250ms ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: ${color.primary.accent};
+  }
 `;
 
 export const EmptyData = styled.p`
