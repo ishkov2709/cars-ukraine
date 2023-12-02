@@ -1,6 +1,6 @@
 # Cars Ukraine
 
-![Logo](./src/img//logo.png)
+![Logo](./src/img/logo.png)
 
 ## Description
 
