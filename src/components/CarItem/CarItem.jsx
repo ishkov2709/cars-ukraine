@@ -9,6 +9,7 @@ import {
   Price,
   Wrapper,
   FavBtn,
+  Skeleton,
 } from './CarItem.styled';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 
@@ -19,10 +20,13 @@ import {
 } from '../../store/rootSlice';
 import { selectFavorites } from '../../store/selectors';
 import { color } from '../../styles/colors';
+import { useState } from 'react';
 
 const CarItem = ({ info }) => {
   const favorites = useSelector(selectFavorites);
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const {
     id,
     year,
@@ -51,7 +55,14 @@ const CarItem = ({ info }) => {
   const [country, city] = address.split(', ').reverse().slice(0, 2);
   return (
     <Wrapper>
-      <Img src={img} width={274} alt="car" />
+      <Img
+        src={img}
+        width={274}
+        alt="car"
+        isloaded={isLoaded.toString()}
+        onLoad={() => setIsLoaded(true)}
+      />
+      {!isLoaded && <Skeleton />}
       <BrandAndPriceBox>
         <BrandYear>
           {make}, {year}

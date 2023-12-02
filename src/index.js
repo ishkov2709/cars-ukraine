@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import 'modern-normalize/modern-normalize.css';
 import '@fontsource/manrope';
 import './index.css';
+import './styles/keyframes.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';

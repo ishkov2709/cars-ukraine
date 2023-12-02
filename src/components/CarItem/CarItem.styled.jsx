@@ -7,7 +7,10 @@ export const Wrapper = styled.li`
   width: 274px;
 `;
 
-export const Img = styled.img`
+export const Img = styled.img.withConfig({
+  shouldForwardProp: props => props,
+})`
+  display: ${props => (props.isloaded === 'false' ? 'none' : 'block')};
   width: 274px;
   height: 268px;
   border-radius: 14px;
@@ -71,4 +74,17 @@ export const FavBtn = styled.button`
   right: 14px;
 
   background: transparent;
+`;
+
+export const Skeleton = styled.div`
+  width: 274px;
+  height: 268px;
+
+  border-radius: 14px;
+
+  background: linear-gradient(45deg, #c0c0c0, #ffffff, #c0c0c0, #ffffff);
+  background-size: 400% 400%;
+  animation: iridescentEffect 10s infinite;
+
+  margin-bottom: 14px;
 `;

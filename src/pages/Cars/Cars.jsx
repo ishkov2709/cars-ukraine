@@ -19,6 +19,7 @@ const Cars = () => {
   const error = useSelector(selectError);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     dispatch(getAdverts());
@@ -26,7 +27,12 @@ const Cars = () => {
 
   useEffect(() => {
     page > 1 && dispatch(paginatePage(page));
-  }, [page, dispatch]);
+    setScrollPosition(window.scrollY);
+  }, [page, dispatch, setScrollPosition]);
+
+  useEffect(() => {
+    adverts && window.scrollTo(0, scrollPosition);
+  }, [adverts, scrollPosition]);
 
   const handlePaginate = () => {
     setPage(prevState => (prevState = prevState + 1));
