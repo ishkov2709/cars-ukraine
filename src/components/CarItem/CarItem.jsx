@@ -12,8 +12,13 @@ import {
 } from './CarItem.styled';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 
-import { addToFavorites, removeFromFavorites } from '../../store/rootSlice';
+import {
+  addToFavorites,
+  openModal,
+  removeFromFavorites,
+} from '../../store/rootSlice';
 import { selectFavorites } from '../../store/selectors';
+import { color } from '../../styles/colors';
 
 const CarItem = ({ info }) => {
   const favorites = useSelector(selectFavorites);
@@ -39,6 +44,10 @@ const CarItem = ({ info }) => {
     dispatch(removeFromFavorites(id));
   };
 
+  const handleOpenModal = () => {
+    dispatch(openModal(info));
+  };
+
   const [country, city] = address.split(', ').reverse().slice(0, 2);
   return (
     <Wrapper>
@@ -58,13 +67,20 @@ const CarItem = ({ info }) => {
         <Info>{id}</Info>
         <Info>{functionalities[0]}</Info>
       </OtherInfo>
-      <Button style={{ width: '100%', height: 44, borderRadius: '12px' }}>
+      <Button
+        style={{ width: '100%', height: 44, borderRadius: '12px' }}
+        onClick={handleOpenModal}
+      >
         Learn more
       </Button>
 
       {favorites.find(el => el.id === id) ? (
         <FavBtn>
-          <FaHeart onClick={handleRemove} color="#ffffff" size={18} />
+          <FaHeart
+            onClick={handleRemove}
+            color={color.primary.blue}
+            size={18}
+          />
         </FavBtn>
       ) : (
         <FavBtn>

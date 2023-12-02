@@ -2,9 +2,10 @@ import styled from 'styled-components';
 import { color } from '../../styles/colors';
 
 export const Section = styled.section`
+  margin-top: 68px;
   padding-top: 20px;
 
-  padding-bottom: 50px; //Temorary
+  padding-bottom: 50px;
 `;
 
 export const List = styled.ul`
@@ -28,4 +29,15 @@ export const MoreBtn = styled.button`
 
   border-bottom: 1px solid ${color.primary.blue};
   padding-bottom: 0;
+`;
+
+export const EmptyData = styled.p`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px 0;
+
+  font-size: 18px;
+  color: ${color.primary.black};
 `;

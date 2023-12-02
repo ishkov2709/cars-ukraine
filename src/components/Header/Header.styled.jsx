@@ -2,12 +2,24 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { color } from '../../styles/colors';
 
-export const Wrapper = styled.header`
+export const Wrapper = styled.header.withConfig({
+  shouldForwardProp: prop => prop,
+})`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: ${props =>
+    !props.currentpath ? color.primary.black + 33 : 'transparent'};
+  color: ${props => (!props.currentpath ? '#ffffff' : color.primary.black)};
+
+  width: 100%;
+
   & .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 130px;
   }
 `;
 
@@ -25,6 +37,13 @@ export const NavigLink = styled(NavLink)`
   &.active {
     color: ${color.primary.blue};
   }
+
+  &:hover,
+  &:focus {
+    color: ${color.primary.accent};
+  }
+
+  transition: color 250ms ease-in-out;
 `;
 
 export const Img = styled.img``;

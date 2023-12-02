@@ -2,7 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const toNumber = str => {
-  return Number(str.replace('$', ''));
+  let numbers = str.match(/\d+/g);
+  let res = numbers ? numbers.join('') : '';
+  return Number(res);
 };
 
 axios.defaults.baseURL = 'https://6568c8d69927836bd9756a5b.mockapi.io/api';
@@ -25,19 +27,25 @@ export const getAdverts = createAsyncThunk(
       if (data.length === 0) throw new Error('No result found');
       let filteredData = [...data];
       if (price) {
+        console.log('minMileage');
         const arr = [...filteredData].filter(
           el => toNumber(el.rentalPrice) <= price
         );
         filteredData = [...arr];
       }
 
-      if (minMileage) {
-        const arr = [...filteredData].filter(el => el.mileage >= minMileage);
+      if (minMileage && minMileage !== '0') {
+        console.log('minMileage');
+        const arr = [...filteredData].filter(
+          el => el.mileage >= toNumber(minMileage)
+        );
         filteredData = [...arr];
       }
-
-      if (maxMileage) {
-        const arr = [...filteredData].filter(el => el.mileage <= minMileage);
+      if (maxMileage && maxMileage !== '0') {
+        console.log('maxMileage>>>>' + maxMileage);
+        const arr = [...filteredData].filter(
+          el => el.mileage <= toNumber(maxMileage)
+        );
         filteredData = [...arr];
       }
       return filteredData;
@@ -46,7 +54,7 @@ export const getAdverts = createAsyncThunk(
     }
   }
 );
-
+/////////////////////////////////////////////////////////
 export const paginatePage = createAsyncThunk(
   'adverts/paginate',
   async (page, thunkAPI) => {
@@ -70,12 +78,15 @@ export const paginatePage = createAsyncThunk(
       }
 
       if (minMileage) {
-        const arr = [...filteredData].filter(el => el.mileage >= minMileage);
+        const arr = [...filteredData].filter(
+          el => el.mileage >= toNumber(minMileage)
+        );
         filteredData = [...arr];
       }
-
       if (maxMileage) {
-        const arr = [...filteredData].filter(el => el.mileage <= minMileage);
+        const arr = [...filteredData].filter(
+          el => el.mileage <= toNumber(maxMileage)
+        );
         filteredData = [...arr];
       }
       return filteredData;

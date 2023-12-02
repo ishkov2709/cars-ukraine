@@ -26,6 +26,12 @@ const rootSlice = createSlice({
     removeFromFavorites: (state, { payload }) => {
       state.favorites = state.favorites.filter(({ id }) => id !== payload);
     },
+    openModal: (state, { payload }) => {
+      state.modal = { ...payload };
+    },
+    closeModal: state => {
+      state.modal = null;
+    },
   },
   extraReducers: builder => {
     builder
@@ -64,4 +70,6 @@ export const {
   setMake,
   addToFavorites,
   removeFromFavorites,
+  openModal,
+  closeModal,
 } = rootSlice.actions;

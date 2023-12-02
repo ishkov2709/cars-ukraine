@@ -24,7 +24,7 @@ const SelectGroup = ({
       <Box>
         <Select
           styles={{
-            control: (baseStyles, state) => ({
+            control: baseStyles => ({
               ...baseStyles,
               borderColor: 'transparent',
               backgroundColor: color.primary.white,
@@ -41,26 +41,30 @@ const SelectGroup = ({
               transform: state.isFocused ? 'rotate(180deg)' : 'rotate(0deg)',
               transition: 'transform 250ms linear',
             }),
-            placeholder: (baseStyles, state) => ({
+            placeholder: baseStyles => ({
               ...baseStyles,
               fontFamily: 'Manrope',
               fontWeight: 600,
               fontSize: '18px',
               color: color.primary.black,
             }),
-            menu: (baseStyles, state) => ({
+            menu: baseStyles => ({
               ...baseStyles,
               fontFamily: 'Manrope',
-              fontWeight: 600,
+              fontWeight: 500,
               fontSize: '16px',
               color: `${color.primary.black}33`,
               borderRadius: 14,
               overflow: 'hidden',
               padding: '14px 8px 14px 18px',
             }),
-            multiValueLabel: {
-              color: '#000000',
-            },
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              backgroundColor: '#ffffff',
+              color: state.isSelected
+                ? `${color.primary.black}`
+                : `${color.primary.black}33`,
+            }),
           }}
           value={selectedOption}
           onChange={handleOption}

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import CarItem from '../../components/CarItem/CarItem';
 import Container from '../../components/common/Container';
-import { List, Section } from '../Cars/Cars.styled';
+import { EmptyData, List, Section } from '../Cars/Cars.styled';
 import { selectFavorites } from '../../store/selectors';
 
 const Favorites = () => {
@@ -16,6 +16,9 @@ const Favorites = () => {
               return <CarItem key={el.id} info={el} />;
             })}
           </List>
+        )}
+        {favorites.length === 0 && (
+          <EmptyData>The list of chosen cars is empty</EmptyData>
         )}
       </Container>
     </Section>

@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Name } from '../FormSearch.styled';
 import { Input, Wrapper, Box } from './PriceRange.styled';
 import { setMaxMileage, setMinMileage } from '../../../store/rootSlice';
+import { selectMaxMileage, selectMinMileage } from '../../../store/selectors';
 
 const PriceRange = () => {
-  const minMileage = useSelector(state => state.filter.minMileage);
-  const maxMileage = useSelector(state => state.filter.maxMileage);
+  const minMileage = useSelector(selectMinMileage);
+  const maxMileage = useSelector(selectMaxMileage);
   const dispatch = useDispatch();
 
   return (

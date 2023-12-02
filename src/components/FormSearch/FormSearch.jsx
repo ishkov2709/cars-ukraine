@@ -16,6 +16,10 @@ const FormSearch = ({ setPage }) => {
     dispatch(setPrice(value));
   };
 
+  const handleMake = value => {
+    dispatch(setMake(value));
+  };
+
   const handleSerach = () => {
     setPage(1);
     dispatch(getAdverts());
@@ -39,7 +43,7 @@ const FormSearch = ({ setPage }) => {
         name="Car brand"
         placeholder="Enter the text"
         width="224px"
-        handler={setMake}
+        handler={handleMake}
         options={constants.optionsCar}
       />
       <SelectGroup

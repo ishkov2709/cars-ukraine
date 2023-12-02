@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import CarItem from '../../components/CarItem/CarItem';
 import FormSearch from '../../components/FormSearch';
 import Container from '../../components/common/Container';
-import { List, MoreBtn, Section } from './Cars.styled';
+import { EmptyData, List, MoreBtn, Section } from './Cars.styled';
 import { useEffect, useState } from 'react';
 import { getAdverts, paginatePage } from '../../store/thunk';
+import Loader from '../../components/common/Loader/Loader';
+import { FaSadCry } from 'react-icons/fa';
 
 const Cars = () => {
   const adverts = useSelector(state => state.adverts);
@@ -29,7 +31,8 @@ const Cars = () => {
     <Section>
       <Container>
         <FormSearch setPage={setPage} />
-        {adverts.length > 0 && (
+        {isLoading && <Loader />}
+        {adverts.length > 0 && !isLoading && (
           <List>
             {adverts.map(el => {
               return <CarItem key={el.id} info={el} />;
@@ -38,6 +41,12 @@ const Cars = () => {
         )}
         {adverts.length > 0 && !isLoading && !error && (
           <MoreBtn onClick={handlePaginate}>Load more</MoreBtn>
+        )}
+        {adverts.length === 0 && !isLoading && (
+          <EmptyData>
+            No results found for your query{' '}
+            <FaSadCry size={26} style={{ marginLeft: '8px' }} />
+          </EmptyData>
         )}
       </Container>
     </Section>

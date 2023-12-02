@@ -1,8 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import SharedLayout from './components/SharedLayout';
 import Home from './pages/Home';
-import Cars from './pages/Cars';
-import Favorites from './pages/Favorites/Favorites';
+import { lazy } from 'react';
+
+const Cars = lazy(() => import('./pages/Cars'));
+const Favorites = lazy(() => import('./pages/Favorites'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const App = () => {
   return (
@@ -11,6 +14,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="catalog" element={<Cars />} />
         <Route path="favorites" element={<Favorites />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
