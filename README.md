@@ -4,9 +4,9 @@
 
 ## Description
 
-** Welcome to Cars Ukraine — your premier destination for hassle-free car
-rentals in Ukraine. Discover the freedom to explore the beauty of the country at
-your own pace with our diverse fleet of high-quality vehicles.**
+**Welcome to Cars Ukraine — your premier destination for hassle-free car rentals
+in Ukraine. Discover the freedom to explore the beauty of the country at your
+own pace with our diverse fleet of high-quality vehicles.**
 
 ## Getting Started
 
