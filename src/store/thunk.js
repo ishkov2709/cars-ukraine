@@ -27,7 +27,6 @@ export const getAdverts = createAsyncThunk(
       if (data.length === 0) throw new Error('No result found');
       let filteredData = [...data];
       if (price) {
-        console.log('minMileage');
         const arr = [...filteredData].filter(
           el => toNumber(el.rentalPrice) <= price
         );
@@ -35,14 +34,12 @@ export const getAdverts = createAsyncThunk(
       }
 
       if (minMileage && minMileage !== '0') {
-        console.log('minMileage');
         const arr = [...filteredData].filter(
           el => el.mileage >= toNumber(minMileage)
         );
         filteredData = [...arr];
       }
       if (maxMileage && maxMileage !== '0') {
-        console.log('maxMileage>>>>' + maxMileage);
         const arr = [...filteredData].filter(
           el => el.mileage <= toNumber(maxMileage)
         );
@@ -54,7 +51,7 @@ export const getAdverts = createAsyncThunk(
     }
   }
 );
-/////////////////////////////////////////////////////////
+
 export const paginatePage = createAsyncThunk(
   'adverts/paginate',
   async (page, thunkAPI) => {

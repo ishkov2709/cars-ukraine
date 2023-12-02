@@ -4,7 +4,6 @@ import { color } from '../../styles/colors';
 export const Section = styled.section`
   margin-top: 68px;
   padding-top: 20px;
-
   padding-bottom: 50px;
 `;
 
